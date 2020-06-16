@@ -1,3 +1,6 @@
+## Mangagement System
+본 프로젝트는 포트폴리오용 고객 관리 시스템(mangement System)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
