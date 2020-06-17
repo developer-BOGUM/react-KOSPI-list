@@ -14,18 +14,18 @@ const customers = [
   {
     "id": 2,
     "image":"https://placeimg.com/64/64/2",
-    "name": "홍길동",
-    "birthday": "961222",
+    "name": "김철수",
+    "birthday": "941112",
     "gender": "남자",
     "jab": "대학생"
   },
   {
     "id": 3,
     "image":"https://placeimg.com/64/64/3",
-    "name": "홍길동",
-    "birthday": "961222",
-    "gender": "남자",
-    "jab": "대학생"
+    "name": "이영희",
+    "birthday": "900402",
+    "gender": "여자",
+    "jab": "회사원"
   }
 ]
 
@@ -33,30 +33,21 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <Customer
-          id={customers[0].id}
-          image={customers[0].image}
-          name={customers[0].name}
-          birthday={customers[0].birthday}
-          gender={customers[0].gender}
-          jab={customers[0].jab}
-        />
-        <Customer
-          id={customers[1].id}
-          image={customers[1].image}
-          name={customers[1].name}
-          birthday={customers[1].birthday}
-          gender={customers[1].gender}
-          jab={customers[1].jab}
-        />
-        <Customer
-          id={customers[2].id}
-          image={customers[2].image}
-          name={customers[2].name}
-          birthday={customers[2].birthday}
-          gender={customers[2].gender}
-          jab={customers[2].jab}
-        />
+        {
+          customers.map(c =>  {
+            return (
+              <Customer
+              key={c.id}
+              id={c.id}
+              image={c.image}
+              name={c.name}
+              birthday={c.birthday}
+              gender={c.gender}
+              jab={c.jab}
+              />
+            );
+          })
+        }
       </div>
     );
   }
