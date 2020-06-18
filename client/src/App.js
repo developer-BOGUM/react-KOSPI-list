@@ -69,7 +69,7 @@ class App extends React.Component {
                       name={c.name}
                       birthday={c.birthday}
                       gender={c.gender}
-                      jab={c.jab}
+                      job={c.job}
                     />
               );
               }) : 
