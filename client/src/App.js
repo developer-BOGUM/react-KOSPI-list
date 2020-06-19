@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Customer from './components/Customer';
+import CustomerAdd from './components/CustomerAdd';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -48,6 +49,7 @@ class App extends React.Component {
 
   render() {
     return(
+      <div>
         <Table>
           <TableHead>
             <TableRow>
@@ -81,6 +83,8 @@ class App extends React.Component {
               }
           </TableBody>
         </Table>
+        <CustomerAdd/>
+      </div>
     );
   }
 }
