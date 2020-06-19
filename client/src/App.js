@@ -24,10 +24,24 @@ const styles = theme => ({
 
 class App extends React.Component {
 
-  state = {
-    customers:"",
-    completed:0
+  constructor(props) {
+    super(props);
+    this.state = {
+      customers:"",
+      completed: 0
+    }
   }
+
+  stateRefresh = () => {
+    this.setState({
+      customers:"",
+      completed: 0
+    });
+    this.callapi()
+    .then(res => this.setState({customers: res}))
+    .catch(err => console.log(err));
+  }
+
   componentDidMount() {
     this.timer = setInterval(this.progress, 20);
     this.callapi()
@@ -59,6 +73,7 @@ class App extends React.Component {
               <TableCell>생년월일</TableCell>
               <TableCell>성별</TableCell>
               <TableCell>직업</TableCell>
+              <TableCell>설정</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,6 +87,7 @@ class App extends React.Component {
                       birthday={c.birthday}
                       gender={c.gender}
                       job={c.job}
+                      stateRefresh={this.stateRefresh}
                     />
               );
               }) : 
@@ -83,7 +99,7 @@ class App extends React.Component {
               }
           </TableBody>
         </Table>
-        <CustomerAdd/>
+        <CustomerAdd stateRefresh={this.stateRefresh}/>
       </div>
     );
   }
