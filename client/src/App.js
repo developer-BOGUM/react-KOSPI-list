@@ -82,9 +82,9 @@ const Styles = theme => ({
     justifyContent: 'center'
   },
   paper: {
-    marginLeft: 18,
-    marginRight: 18
+    margin: 18
   },
+  
   
 });
 
@@ -134,17 +134,17 @@ class App extends React.Component {
     const { completed } = this.state;
     this.setState({ completed: completed >= 100 ? 0 : completed + 1});
   }
+  
   render() {
     const filteredComponents = (data) => {
       data = data.filter((c) => {
         return c.name.indexOf(this.state.searchKeyword) > -1;
       });
       return data.map((c) => {
-        return <Stock stateRefresh={this.stateRefresh} key={c.id} id={c.id} name={c.name} now={c.now} fluctuat={c.fluctuat} />
+        return <Stock stateRefresh={this.stateRefresh} key={c.codekey} id={c.codekey} name={c.name} now={c.now} fluctuat={c.fluctuat} />
       });
     }
     const { classes } = this.props;
-    const cellList = ["종목코드", "종목명", "현재가", "등락률", "설정"]
     return(
       <div className={classes.root}>
       <AppBar position="static">
@@ -177,16 +177,15 @@ class App extends React.Component {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.menu}>
-      <StockAdd stateRefresh={this.stateRefresh}/>
-      </div>
       <Paper className={classes.paper}>
       <Table>
         <TableHead>
           <TableRow>
-            {cellList.map(c => {
-              return <TableCell className={classes.TableHead}>{c}</TableCell>
-            })}
+          <TableCell align="center" colSpan="1">종목코드</TableCell>
+                <TableCell align="left" colSpan="2">종목명</TableCell>
+                <TableCell align="right" colSpan="1">현재가</TableCell>
+                <TableCell align="right" colSpan="1">등락률</TableCell>
+                <TableCell align="center" colSpan="1">설정</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
