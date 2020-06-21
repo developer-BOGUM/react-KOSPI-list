@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Customer from './components/Customer';
-import CustomerAdd from './components/CustomerAdd';
+import Stock from './components/Stock';
+import StockAdd from './components/StockAdd';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -93,7 +93,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      customers:"",
+      stocks:"",
       completed: 0,
       searchKeyword:""
     }
@@ -101,25 +101,25 @@ class App extends React.Component {
 
   stateRefresh = () => {
     this.setState({
-      customers:"",
+      stocks:"",
       completed: 0,
       searchKeyword:""
     });
     this.callapi()
-    .then(res => this.setState({customers: res}))
+    .then(res => this.setState({stocks: res}))
     .catch(err => console.log(err));
   }
 
   componentDidMount() {
     this.timer = setInterval(this.progress, 20);
     this.callapi()
-    .then(res => this.setState({customers: res}))
+    .then(res => this.setState({stocks: res}))
     .catch(err => console.log(err));
   }
 
 
   callapi = async () => {
-    const response = await fetch('/api/customers');
+    const response = await fetch('/api/stocks');
     const body = await response.json();
     return body;
   }
@@ -140,11 +140,11 @@ class App extends React.Component {
         return c.name.indexOf(this.state.searchKeyword) > -1;
       });
       return data.map((c) => {
-        return <Customer stateRefresh={this.stateRefresh} key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />
+        return <Stock stateRefresh={this.stateRefresh} key={c.id} id={c.id} name={c.name} now={c.now} fluctuat={c.fluctuat} />
       });
     }
     const { classes } = this.props;
-    const cellList = ["번호", "프로필 이미지", "이름", "생년월일", "성별", "직업", "설정"]
+    const cellList = ["종목코드", "종목명", "현재가", "등락률", "설정"]
     return(
       <div className={classes.root}>
       <AppBar position="static">
@@ -158,7 +158,7 @@ class App extends React.Component {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            고객관리시스템
+            전체보기
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -178,7 +178,7 @@ class App extends React.Component {
         </Toolbar>
       </AppBar>
       <div className={classes.menu}>
-      <CustomerAdd stateRefresh={this.stateRefresh}/>
+      <StockAdd stateRefresh={this.stateRefresh}/>
       </div>
       <Paper className={classes.paper}>
       <Table>
@@ -190,10 +190,10 @@ class App extends React.Component {
           </TableRow>
         </TableHead>
         <TableBody>
-            {this.state.customers ? 
-              filteredComponents(this.state.customers) :
+            {this.state.stocks ? 
+              filteredComponents(this.state.stocks) :
             <TableRow>
-              <TableCell colSpan="8" align="center">
+              <TableCell colSpan="5" align="center">
                 <CircularProgress  variant="determinate" value={this.state.completed} />
               </TableCell>  
             </TableRow>
