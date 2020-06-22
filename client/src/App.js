@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Stock from './components/Stock';
-import StockAdd from './components/StockAdd';
 import Appsell from './components/Appshell';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -12,22 +11,16 @@ import Paper from '@material-ui/core/Paper'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/core/styles';
 
 const Styles = theme => ({
   root: {
-    // flexGrow: 1,
-    width: '100%',
-    // minWidth: 768
-    // overflowX: "hidden"
+    width: '100%'
   },
-
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -66,7 +59,6 @@ const Styles = theme => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -86,7 +78,6 @@ const Styles = theme => ({
   paper: {
     margin: 18
   },
-    
 });
 
 class App extends React.Component {
@@ -181,7 +172,7 @@ class App extends React.Component {
                 <TableCell align="left" colSpan="2">종목명</TableCell>
                 <TableCell align="right" colSpan="1">현재가</TableCell>
                 <TableCell align="right" colSpan="1">등락률</TableCell>
-                <TableCell align="center" colSpan="1">설정</TableCell>
+                <TableCell align="center" colSpan="1">관심목록</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

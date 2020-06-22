@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuIcon from '@material-ui/icons/Menu';
 import AppBar from '@material-ui/core/AppBar';
 
+
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -20,6 +21,8 @@ const useStyles = makeStyles({
     overflow: "hidden"
   }
 });
+
+
 
 export default function Appsell() {
   const classes = useStyles();
@@ -49,33 +52,22 @@ export default function Appsell() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {["관심종목", "KOSPI200"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} align="" />
-          </ListItem>
-        ))}
+      <ListItem button>
+      <ListItemText primary="관심종목" align="" />
+      </ListItem>
+      <ListItem button>
+      <ListItemText primary="KOSPI 200" align="" />
+      </ListItem>
       </List>
       <Divider />
       <List>
-        {["전체보기"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} align="" />
-          </ListItem>
-        ))}
+      <ListItem button>
+      <ListItemText primary="전체보기" align="" />
+      </ListItem>
       </List>
-      {/* <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </div>
   );
-
+  
   return (
     <div>
         <IconButton className={classes.menuButton} color="inherit" onClick={toggleDrawer("left", true)}>
