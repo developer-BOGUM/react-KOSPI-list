@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Stock from './components/Stock';
 import StockAdd from './components/StockAdd';
+import Appsell from './components/Appshell';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,9 +24,10 @@ const Styles = theme => ({
   root: {
     // flexGrow: 1,
     width: '100%',
-    minWidth: 768
+    // minWidth: 768
     // overflowX: "hidden"
   },
+
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -84,8 +86,7 @@ const Styles = theme => ({
   paper: {
     margin: 18
   },
-  
-  
+    
 });
 
 class App extends React.Component {
@@ -95,7 +96,7 @@ class App extends React.Component {
     this.state = {
       stocks:"",
       completed: 0,
-      searchKeyword:""
+      searchKeyword:"",
     }
   }
 
@@ -105,6 +106,7 @@ class App extends React.Component {
       completed: 0,
       searchKeyword:""
     });
+
     this.callapi()
     .then(res => this.setState({stocks: res}))
     .catch(err => console.log(err));
@@ -141,24 +143,18 @@ class App extends React.Component {
         return c.name.indexOf(this.state.searchKeyword) > -1;
       });
       return data.map((c) => {
-        return <Stock stateRefresh={this.stateRefresh} key={c.codekey} id={c.codekey} name={c.name} now={c.now} fluctuat={c.fluctuat} />
+        return <Stock stateRefresh={this.stateRefresh} key={c.codekey} codekey={c.codekey} name={c.name} now={c.now} fluctuat={c.fluctuat} myattention={c.myattention} />
       });
     }
     const { classes } = this.props;
+    
     return(
       <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          <Appsell/>
           <Typography className={classes.title} variant="h6" noWrap>
-            전체보기
+            KOSPI 전체보기
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -192,7 +188,7 @@ class App extends React.Component {
             {this.state.stocks ? 
               filteredComponents(this.state.stocks) :
             <TableRow>
-              <TableCell colSpan="5" align="center">
+              <TableCell colSpan="6" align="center">
                 <CircularProgress  variant="determinate" value={this.state.completed} />
               </TableCell>  
             </TableRow>

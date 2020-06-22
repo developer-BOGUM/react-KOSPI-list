@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
-class StockDelete extends React.Component {
+class MyStockDelete extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,30 +26,29 @@ class StockDelete extends React.Component {
             open: false
         })
     }
-    deleteCustomer(id) {
-        const url = '/api/stocks/' + id;
-        fetch(url, {method: 'DELETE'}) 
-        .then((response) => {
-            console.log(response.data);
-            this.props.stateRefresh();
-            })
+    myStockAdd(codekey) {
+        const url = '/api/stocks/' + codekey;
+        fetch(url, {
+            method: 'DELETE'
+        });
+        this.props.stateRefresh();
         }
 
     render() {
         return (
             <div>
-                <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>삭제</Button>
+                <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>제거</Button>
                 <Dialog open={this.state.open} onClose={this.handleClose}>
                     <DialogTitle>
-                        삭제 경고
+                        관심목록 제거
                     </DialogTitle>
                     <DialogContent>
                         <Typography gutterBottom>
-                            선택한 고객 정보가 삭제됩니다.
+                            선택한 종목을 관심목록에서 제거합니다.
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <Button variant="contained" color="primary" onClick={(e) => {this.deleteCustomer(this.props.id)}}>삭제</Button>
+                        <Button variant="contained" color="primary" onClick={(e) => {this.myStockAdd(this.props.codekey)}}>제거</Button>
                         <Button variant="outlined" color="primary" onClick={this.handleClose}>취소</Button>
                     </DialogActions>
                 </Dialog>
@@ -58,4 +57,4 @@ class StockDelete extends React.Component {
     }
 }
 
-export default StockDelete;
+export default MyStockDelete;
