@@ -6,6 +6,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MyStockDelete from './MyStockDelete';
+import { TableCell } from '@material-ui/core';
+
 
 
 class MyStockAdd extends React.Component {
@@ -36,26 +38,26 @@ class MyStockAdd extends React.Component {
         }
 
     render() {
-        if (this.props.myattention == 0) {
+        if (this.props.myattention === 0) {
         return (
-            <div>
-                <Button variant="contained" color="primary" onClick={this.handleClickOpen}>추가</Button>
-                <Dialog open={this.state.open} onClose={this.handleClose}>
-                    <DialogTitle>
-                        관심목록 추가
-                    </DialogTitle>
-                    <DialogContent>
-                        <Typography gutterBottom>
-                            선택한 종목을 관심목록에 추가합니다.
-                        </Typography>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button variant="contained" color="primary" onClick={(e) => {this.myStockAdd(this.props.codekey)}}>추가</Button>
-                        <Button variant="outlined" color="primary" onClick={this.handleClose}>취소</Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        )
+                <TableCell align="center" colSpan="1">
+                    <Button variant="contained" color="primary" onClick={this.handleClickOpen}>추가</Button>
+                        <Dialog open={this.state.open} onClose={this.handleClose}>
+                        <DialogTitle>
+                            관심목록 추가
+                        </DialogTitle>
+                        <DialogContent>
+                            <Typography gutterBottom>
+                                선택한 종목을 관심목록에 추가합니다.
+                            </Typography>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button variant="contained" color="primary" onClick={(e) => {this.myStockAdd(this.props.codekey)}}>추가</Button>
+                            <Button variant="outlined" color="primary" onClick={this.handleClose}>취소</Button>
+                        </DialogActions>
+                    </Dialog>
+                </TableCell>
+        );
         }
         else {
             return (

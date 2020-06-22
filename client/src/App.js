@@ -16,10 +16,11 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/core/styles';
+import TableContainer from '@material-ui/core/TableContainer';
 
 const Styles = theme => ({
   root: {
-    width: '100%'
+    width: '100%',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -69,15 +70,14 @@ const Styles = theme => ({
       },
     }, 
   },
-  menu: {
-    marginTop: 15,
-    marginBottom: 15,
-    display: 'flex',
-    justifyContent: 'center'
-  },
+
   paper: {
-    margin: 18
+    margin: 11,
   },
+  table: {
+    minWidth: 348,
+  },
+
 });
 
 class App extends React.Component {
@@ -110,11 +110,17 @@ class App extends React.Component {
     .catch(err => console.log(err));
   }
 
-
-  callapi = async () => {
-    const response = await fetch('/api/stocks');
-    const body = await response.json();
-    return body;
+  callapi = async (e) => {
+      if(super.e === 0) {
+      const response = await fetch('/api/stocks/myattention');
+      const body = await response.json();
+      return body;
+      }
+      else {
+        const response = await fetch('/api/stocks');
+        const body = await response.json();
+        return body;
+      }
   }
 
   handleValueChange = (e) => {
@@ -127,7 +133,6 @@ class App extends React.Component {
     const { completed } = this.state;
     this.setState({ completed: completed >= 100 ? 0 : completed + 1});
   }
-  
   render() {
     const filteredComponents = (data) => {
       data = data.filter((c) => {
@@ -138,55 +143,57 @@ class App extends React.Component {
       });
     }
     const { classes } = this.props;
-    
+
     return(
-      <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Appsell/>
-          <Typography className={classes.title} variant="h6" noWrap>
-            KOSPI 전체보기
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+        <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <Appsell callapi={this.props.callapi}/>
+            <Typography className={classes.title} variant="h6" noWrap>
+              KOSPI 전체보기
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="검색하기"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                name="searchKeyword"
+                value={this.state.searchKeyword}
+                onChange={this.handleValueChange}
+              />
             </div>
-            <InputBase
-              placeholder="검색하기"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              name="searchKeyword"
-              value={this.state.searchKeyword}
-              onChange={this.handleValueChange}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Paper className={classes.paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-          <TableCell align="center" colSpan="1">종목코드</TableCell>
-                <TableCell align="left" colSpan="2">종목명</TableCell>
-                <TableCell align="right" colSpan="1">현재가</TableCell>
-                <TableCell align="right" colSpan="1">등락률</TableCell>
-                <TableCell align="center" colSpan="1">관심목록</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-            {this.state.stocks ? 
-              filteredComponents(this.state.stocks) :
+          </Toolbar>
+        </AppBar>
+        <Paper className={classes.paper} >
+        <TableContainer>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
             <TableRow>
-              <TableCell colSpan="6" align="center">
-                <CircularProgress  variant="determinate" value={this.state.completed} />
-              </TableCell>  
+                  <TableCell align="center" colSpan="1">종목코드</TableCell>
+                  <TableCell align="left" colSpan="2">종목명</TableCell>
+                  <TableCell align="right" colSpan="1">현재가</TableCell>
+                  <TableCell align="right" colSpan="1">등락률</TableCell>
+                  <TableCell align="center" colSpan="1">관심목록</TableCell>
             </TableRow>
-            }
-        </TableBody>
-      </Table>
-    </Paper>
+          </TableHead>
+          <TableBody>
+            {this.state.stocks ? 
+                  filteredComponents(this.state.stocks) :
+                <TableRow>
+                  <TableCell align="center" colSpan="6">
+                    <CircularProgress  variant="determinate" value={this.state.completed} />
+                  </TableCell>  
+                </TableRow>
+              }
+          </TableBody>
+        </Table>
+      </TableContainer>
+      </Paper>
     </div>
     );
   }

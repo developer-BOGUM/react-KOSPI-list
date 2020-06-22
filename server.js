@@ -29,7 +29,7 @@ app.get('/api/stocks', (req, res) => {
     );
 });
 
-app.post('/api/stocks', (req, res) => {
+app.get('/api/stocks/myattention', (req, res) => {
     connection.query(
         "SELECT * FROM STOCK WHERE myattention = 1",
         (err, rows, fields) => {

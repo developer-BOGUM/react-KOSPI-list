@@ -5,6 +5,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { TableCell } from '@material-ui/core';
 
 
 class MyStockDelete extends React.Component {
@@ -36,7 +37,7 @@ class MyStockDelete extends React.Component {
 
     render() {
         return (
-            <div>
+            <TableCell align="center" colSpan="1">
                 <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>제거</Button>
                 <Dialog open={this.state.open} onClose={this.handleClose}>
                     <DialogTitle>
@@ -52,7 +53,7 @@ class MyStockDelete extends React.Component {
                         <Button variant="outlined" color="primary" onClick={this.handleClose}>취소</Button>
                     </DialogActions>
                 </Dialog>
-            </div>
+            </TableCell>
         )
     }
 }

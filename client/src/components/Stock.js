@@ -12,7 +12,7 @@ class Stock extends React.Component {
                 <TableCell align="left" colSpan="2">{this.props.name}</TableCell>
                 <TableCell align="right" colSpan="1">{this.props.now}</TableCell>
                 <FluctuatColor fluctuat={this.props.fluctuat}/>
-                <TableCell align="center" colSpan="1"><MyStockAdd stateRefresh={this.props.stateRefresh} codekey={this.props.codekey} myattention={this.props.myattention}/></TableCell>
+                <MyStockAdd stateRefresh={this.props.stateRefresh} codekey={this.props.codekey} myattention={this.props.myattention}/>
                </TableRow>
         );
     }
